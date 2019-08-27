@@ -1,0 +1,73 @@
+<!--pages/index/index.wxml-->
+<!-- <text>pages/index/index.wxml</text> -->
+<view class="index">
+  <view class="index-serch">
+    <van-search value="{{ value }}" placeholder="HSPM" />
+  </view>
+  <view class="index-tabbar">
+  <van-tabs active="{{ active }}" bind:change="onTabsChange">
+  <van-tab title="首页">
+  <!-- 轮播图 -->
+  <view class="index-carousel">
+    <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
+      <block wx:for='{{indexImgs}}' wx:key=''>
+        <swiper-item class="banner-item">
+          <view class='img-box'>
+            <image src='{{item}}' bindtap='toProdPage' class='banner'></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class='cat-item'>
+      <view class='item' bindtap='toClassifyPage' data-sts="1">
+        <image src='../../images/index.png'></image>
+        <text>新品推荐</text>
+      </view>
+      <view class='item' bindtap='toClassifyPage' data-sts="2">
+        <image src='../../images/fenlei.png'></image>
+        <text>限时特惠</text>
+      </view>
+      <view class='item' bindtap='toClassifyPage' data-sts="3">
+        <image src='../../images/cart.png'></image>
+        <text>每日疯抢</text>
+      </view>
+      <view class='item' bindtap='toCouponCenter'>
+        <image src='../../images/user.png'></image>
+        <text>领优惠券</text>
+      </view>
+    </view>
+    <view class='cat-item'>
+      <view class='item' bindtap='toClassifyPage' data-sts="1">
+        <image src='../../images/index.png'></image>
+        <text>新品推荐</text>
+      </view>
+      <view class='item' bindtap='toClassifyPage' data-sts="2">
+        <image src='../../images/fenlei.png'></image>
+        <text>限时特惠</text>
+      </view>
+      <view class='item' bindtap='toClassifyPage' data-sts="3">
+        <image src='../../images/cart.png'></image>
+        <text>每日疯抢</text>
+      </view>
+      <view class='item' bindtap='toCouponCenter'>
+        <image src='../../images/user.png'></image>
+        <text>领优惠券</text>
+      </view>
+    </view>
+
+
+    
+    
+  </van-tab>
+  <van-tab title="纸张网纱">内容 2</van-tab>
+  <van-tab title="丝带拉花">内容 3</van-tab>
+  <van-tab title="精品花盒">内容 3</van-tab>
+  <van-tab title="婚庆气球">内容 4</van-tab>
+  <van-tab title="开业用品">内容 4</van-tab>
+</van-tabs>
+  </view>
+  
+
+</view>
