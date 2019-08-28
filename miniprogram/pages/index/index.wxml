@@ -70,7 +70,7 @@
 
     <!-- 优惠券 -->
 
-    <image></image>
+    <!-- <image></image> -->
 
     <!-- 表演社团  循环
     <view>
@@ -86,40 +86,44 @@
     </view> -->
 
     <!-- 商城热卖 -->
-    <view class='hot-sale'>
-      <view class='title'>
-        <text>灌灌灌灌灌</text>
-        <view class='more-prod-cont'>
-          <text class='more'>更多</text>
-          <text class='arrow'></text>
+    <block>
+      <view class='hot-sale'>
+        <view class='title'>
+          <text>灌灌灌灌灌</text>
+          <view class='more-prod-cont'>
+            <text class='more'>更多</text>
+            <text class='arrow'></text>
+          </view>
         </view>
-      </view>
-      <view class='hotsale-item-cont'>
-        <block>
-          <view class='prod-items' bindtap='toProdPage'>
-            <view class='hot-imagecont'>
-              <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
-            </view>
-            <view class='hot-text'>
-              <view class='hotprod-text'>好货</view>
-              <view class='prod-info'>哈哈哈哈</view>
-              <view class='prod-text-info'>
-                <view class='price'>
-                  <text class='symbol'>￥</text>
-                  <text class='big-num'>5</text>
-                  <text class='small-num'>.12</text>
+
+        <view class='hotsale-item-cont' wx:for="{{[1,2,3]}}">
+          <block>
+            <view class='prod-items' bindtap='toProdPage'>
+              <view class='hot-imagecont'>
+                <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+              </view>
+              <view class='hot-text'>
+                <view class='hotprod-text'>好货</view>
+                <view class='prod-info'>哈哈哈哈</view>
+                <view class='prod-text-info'>
+                  <view class='price'>
+                    <text class='symbol'>￥</text>
+                    <text class='big-num'>5</text>
+                    <text class='small-num'>.12</text>
+                  </view>
+                  <!-- <view class='singal-price'>
+                    <text>￥</text>
+                    <text>{{prod.oriPrice}}</text>
+                  </view> -->
+                  <image src='../../images/cart.png' class='basket-img'></image>
                 </view>
-                <!-- <view class='singal-price'>
-                  <text>￥</text>
-                  <text>{{prod.oriPrice}}</text>
-                </view> -->
-                <image src='../../images/cart.png' class='basket-img'></image>
               </view>
             </view>
-          </view>
-        </block>
+          </block>
+        </view>
+
       </view>
-    </view>
+    </block>
 
 
 
