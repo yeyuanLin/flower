@@ -57,6 +57,71 @@
       </view>
     </view>
 
+    <!-- 消息播放 -->
+    <view class='message-play' bindtap='onNewsPage'>
+      <image src='../../images/icon/horn.png' class='hornpng'></image>
+      <swiper vertical='true' autoplay='true' duration='1000' class='swiper-cont'>
+        <block wx:for='{{news}}' wx:key=''>
+          <swiper-item class="items">{{item}}</swiper-item>
+        </block>
+      </swiper>
+      <text class='arrow'></text>
+    </view>
+
+    <!-- 优惠券 -->
+
+    <image></image>
+
+    <!-- 表演社团  循环
+    <view>
+      <view>表演社团</view>
+      <text>对土土的自己说拜拜</text>
+      <view>
+        <view wx:for="{{num}}" wx:key="">
+          <image src="../../images/index-img/carousel-3.jpg"></image>
+          <view>气质名媛针织衫</view>
+          <text>9折价：￥115.2</text>
+        </view>
+      </view>
+    </view> -->
+
+    <!-- 商城热卖 -->
+    <view class='hot-sale'>
+      <view class='title'>
+        <text>灌灌灌灌灌</text>
+        <view class='more-prod-cont'>
+          <text class='more'>更多</text>
+          <text class='arrow'></text>
+        </view>
+      </view>
+      <view class='hotsale-item-cont'>
+        <block>
+          <view class='prod-items' bindtap='toProdPage'>
+            <view class='hot-imagecont'>
+              <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+            </view>
+            <view class='hot-text'>
+              <view class='hotprod-text'>好货</view>
+              <view class='prod-info'>哈哈哈哈</view>
+              <view class='prod-text-info'>
+                <view class='price'>
+                  <text class='symbol'>￥</text>
+                  <text class='big-num'>5</text>
+                  <text class='small-num'>.12</text>
+                </view>
+                <!-- <view class='singal-price'>
+                  <text>￥</text>
+                  <text>{{prod.oriPrice}}</text>
+                </view> -->
+                <image src='../../images/cart.png' class='basket-img'></image>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+
 
     
     

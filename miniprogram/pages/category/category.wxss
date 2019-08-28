@@ -14,64 +14,10 @@ page {
   position: fixed;
   display: flex;
   overflow: hidden;
-  margin-top: 100rpx;
   height: calc(100% - 100rpx);
 }
 
-/* 搜索栏 */
 
-.search-bar {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: #777;
-  background: #fff;
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.07);
-  z-index: 3;
-  padding: 20rpx 0;
-}
-
-.search-bar .arrow {
-  width: 20rpx;
-  height: 20rpx;
-  border-bottom: 2rpx solid #777;
-  border-left: 2rpx solid #777;
-  transform: rotate(45deg);
-  position: absolute;
-  left: 30rpx;
-  top: 41rpx;
-}
-
-.search-bar .search-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60rpx;
-  background: #f7f7f7;
-  z-index: 999;
-  width: 92%;
-  border-radius: 50rpx;
-  text-align: center;
-  margin: auto;
-}
-
-.sear-input {
-  font-size: 28rpx;
-}
-
-.search-bar .search-hint {
-  font-size: 28rpx;
-  position: absolute;
-  right: 30rpx;
-  top: 32rpx;
-}
-
-.search-bar .search-box .search-img {
-  width: 32rpx;
-  height: 32rpx;
-  margin-right: 10rpx;
-}
 
 /* 左侧菜单栏 */
 
@@ -91,12 +37,12 @@ page {
   border-bottom: 2rpx silid #e3e3e3;
   position: relative;
   color: #777;
-  font-size: 28rpx;
+  font-size: 36rpx;
 }
 
 .menu-item.active {
   color: #eb2444;
-  font-size: 28rpx;
+  font-size: 36rpx;
   font-weight: bold;
   position: relative;
   background: #fff;

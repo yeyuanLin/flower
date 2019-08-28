@@ -5,10 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    active: 1,
-    indexImgs: ["../../images/index-img/carousel-1.jpg", "../../images/index-img/carousel-2.jpg", "../../images/index-img/carousel-3.jpg", "../../images/index-img/carousel-4.jpg", "../../images/index-img/carousel-5.jpg"],
+    active: 0,
+    indexImgs: ["../../images/index-img/carousel-1.jpg", "../../images/index-img/carousel-2.jpg", "../../images/index-img/carousel-3.jpg"],
     taglist:[],
-    
+    news: ["足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。","hahahaaaaaaaaaaaaaaaaaaaaaaa"],
+    num:[1,2,3]
   },
   onChange(event) {
     wx.showToast({
@@ -22,6 +23,13 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  //跳转公告列表页面
+  onNewsPage: function () {
+    wx.navigateTo({
+      url: '',
+    })
   },
 
   /**

@@ -1,2 +1,11 @@
-<!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view class="profile">
+  <view class="profile-img">
+  <!-- 获取当前用户头像 -->
+  <!-- open-data 组件 类型 -->
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <view class="profile-name">
+    <open-data type="userNickName"></open-data>
+  </view>
+</view>
+<button open-type="getUserInfo" bindgetuserinfo="getUser">获取用户信息</button>
