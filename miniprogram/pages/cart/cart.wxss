@@ -1,1 +1,23 @@
-/* pages/cart/cart.wxss */
+
+
+/* 购物车为空 */
+
+.empty {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.empty .txt {
+  text-align: center;
+  margin-top: 30rpx;
+}
+
+.empty .img {
+  margin-top: 80rpx;
+  text-align: center;
+}
+
+.empty .img image {
+  width: 80rpx;
+  height: 80rpx;
+}

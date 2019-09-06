@@ -1,0 +1,13 @@
+<view class='container'>
+  <view class='recent-news'>
+  <!-- #缺失数据 -->
+  <block wx:for='{{news}}' wx:key=''>
+    <view class='news-item' bindtap='toNewsDetail' data-id="{{item.id}}">
+      <view class='news-item-title'>{{item.title}}</view>
+      <view class='news-item-date'>
+        {{"item.publishTime"}} 这是消息页
+      </view>
+    </view>
+   </block>
+  </view>
+</view>

@@ -79,5 +79,40 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  // 跳转搜索页
+  toSearchPage: function () {
+    wx.navigateTo({
+      url: '/pages/sousuo-page/sousuo-page',
+    })
+  },
+
+  //跳转商品活动页面
+  toClassifyPage: function (e) {
+    // var url = '/pages/prod-classify/prod-classify?
+    // sts=' + e.currentTarget.dataset.sts;
+    // var id = e.currentTarget.dataset.id;
+    // var title = e.currentTarget.dataset.title;
+    // if (id) {
+      // url += "&tagid=" + id + "&title=" + title;
+    // }
+    wx.navigateTo({
+      // url: url
+      url:'/pages/classify/classify'
+    })
+  },
+
+  toProdPage(){
+    wx.navigateTo({
+      url: '/pages/prod/prod',
+    })
+  },
+
+  //跳转公告列表页面
+  onNewsPage: function () {
+    wx.navigateTo({
+      url: '/pages/recent-news/recent-news',
+    })
+  },
+
 })

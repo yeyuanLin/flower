@@ -1,4 +1,7 @@
 /* pages/index/index.wxss */
+.index-serch .van-tabs--line {
+  margin-top: 0;
+}
 
 swiper {
   width: 100%;
@@ -7,7 +10,6 @@ swiper {
 }
 
 swiper.pic-swiper {
-  margin-top: 75rpx;
   padding: 10rpx 0;
   background: #fff;
   height: 422rpx;
@@ -224,4 +226,13 @@ swiper.pic-swiper .banner {
   text-decoration: line-through;
   color: #777;
   margin-left: 15rpx;
+}
+
+/* 纸张网纱 */
+.head-img {
+  height: 250rpx;
+  width: 96%;
+  padding: 15rpx 15rpx 0 15rpx;
+  border-top-left-radius: 60rpx;
+  border-top-right-radius:60rpx;
 }

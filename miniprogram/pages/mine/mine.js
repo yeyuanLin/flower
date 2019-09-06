@@ -5,11 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    selIndex: 0,
-    categoryList: ["美妆护肤","运动服饰","美味零食"],
-    productList: [],
-    categoryImg: '',
-    prodid: ''
+    orderAmount: '',
+    sts: '',
+    collectionCount: 0
   },
 
   /**

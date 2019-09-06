@@ -11,7 +11,7 @@
       <text class='sear-input'>搜索您想要的商品</text>
     </view>
   </view> -->
-  <view class="index-serch">
+  <view class="index-serch" bindtap='toSearchPage'>
     <van-search value="{{ value }}" placeholder="礼花" />
   </view>
 <!-- 滚动内容区 -->

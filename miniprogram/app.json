@@ -3,7 +3,11 @@
     "pages/index/index",
     "pages/category/category",
     "pages/cart/cart",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/sousuo-page/sousuo-page",
+    "pages/classify/classify",
+    "pages/recent-news/recent-news",
+    "pages/prod/prod"
 
     
   ],
@@ -11,7 +15,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "韩都衣舍",
+    "navigationBarTitleText": "优派鲜花包装",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",

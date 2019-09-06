@@ -1,11 +1,17 @@
-// pages/cart/cart.js
+// pages/classify/classify.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    shopCartItemDiscounts:[]
+    sts: 0,
+    prodList: ["哈哈","喜喜","呵呵"],
+    title: "",
+    current: 1,
+    size: 10,
+    pages: 0,
+    tagid: 0
   },
 
   /**

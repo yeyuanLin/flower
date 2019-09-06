@@ -1,11 +1,13 @@
-// pages/cart/cart.js
+// pages/sousuo-page/sousuo-page.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    shopCartItemDiscounts:[]
+    hotSearchList: ["宝宝","孩子"],
+    prodName: "",
+    recentSearch: ["哈哈","喜喜","呵呵"],
   },
 
   /**
@@ -63,4 +65,6 @@ Page({
   onShareAppMessage: function () {
 
   }
+
 })
+

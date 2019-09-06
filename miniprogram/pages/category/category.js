@@ -18,7 +18,7 @@ Page({
         prodId: 0,
         pic: "",
         prodName: "",
-        brief: "好吃的零食",
+        brief: "+",
         price: 1099.34
       },
     ],
@@ -105,22 +105,22 @@ Page({
    * 分类点击事件
    */
   onMenuTab: function (e) {
-    // console.log(e);
+    console.log(e);
     // var id = e.currentTarget.dataset.id;
-    // var index = e.currentTarget.dataset.index;
-    // // this.getProdList(id);
+    var index = e.currentTarget.dataset.index;
+    // this.getProdList(id);
     // this.getProdList(this.data.categoryList[index].categoryId);
-    // this.setData({
-    //   categoryImg: this.data.categoryList[index].pic,
-    //   selIndex: index
-    // });
+    this.setData({
+      // categoryImg: this.data.categoryList[index].pic,  后期数据库
+      selIndex: index
+    });
   },
 
   // 跳转搜索页
   toSearchPage: function () {
-    // wx.navigateTo({
-      // url: '/pages/search-page/search-page',
-    // })
+    wx.navigateTo({
+      url: '/pages/sousuo-page/sousuo-page',
+    })
   },
   getProdList(categoryId) {
     // //加载分类列表

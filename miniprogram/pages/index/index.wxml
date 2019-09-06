@@ -1,12 +1,14 @@
 <!--pages/index/index.wxml-->
-<!-- <text>pages/index/index.wxml</text> -->
 <view class="index">
-  <view class="index-serch">
-    <van-search value="{{ value }}" placeholder="HSPM" />
+  <!-- 搜索框 -->
+  <view class="index-serch" bindtap="toSearchPage">
+    <van-search value="{{ value }}" placeholder="请输入你要搜索的内容" />
   </view>
   <view class="index-tabbar">
-  <van-tabs active="{{ active }}" bind:change="onTabsChange">
+  <van-tabs active="{{ active }}" bind:change="toTabsPage">
   <van-tab title="首页">
+  <!-- 搜索框结束 -->
+
   <!-- 轮播图 -->
   <view class="index-carousel">
     <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
@@ -19,7 +21,10 @@
       </block>
     </swiper>
   </view>
+  
+  <!-- 轮播结束 -->
 
+  <!-- 活动 -->
   <view class='cat-item'>
       <view class='item' bindtap='toClassifyPage' data-sts="1">
         <image src='../../images/index.png'></image>
@@ -51,6 +56,7 @@
         <image src='../../images/cart.png'></image>
         <text>每日疯抢</text>
       </view>
+      <!-- 点击跳转到优惠券页面 -->
       <view class='item' bindtap='toCouponCenter'>
         <image src='../../images/user.png'></image>
         <text>领优惠券</text>
@@ -72,25 +78,13 @@
 
     <!-- <image></image> -->
 
-    <!-- 表演社团  循环
-    <view>
-      <view>表演社团</view>
-      <text>对土土的自己说拜拜</text>
-      <view>
-        <view wx:for="{{num}}" wx:key="">
-          <image src="../../images/index-img/carousel-3.jpg"></image>
-          <view>气质名媛针织衫</view>
-          <text>9折价：￥115.2</text>
-        </view>
-      </view>
-    </view> -->
 
     <!-- 商城热卖 -->
     <block>
       <view class='hot-sale'>
         <view class='title'>
-          <text>灌灌灌灌灌</text>
-          <view class='more-prod-cont'>
+          <text>商城热卖</text>
+          <view class='more-prod-cont' bindtap="toClassifyPage">
             <text class='more'>更多</text>
             <text class='arrow'></text>
           </view>
@@ -125,18 +119,262 @@
       </view>
     </block>
 
-
-
-    
     
   </van-tab>
-  <van-tab title="纸张网纱">内容 2</van-tab>
-  <van-tab title="丝带拉花">内容 3</van-tab>
-  <van-tab title="精品花盒">内容 3</van-tab>
-  <van-tab title="婚庆气球">内容 4</van-tab>
-  <van-tab title="开业用品">内容 4</van-tab>
-</van-tabs>
+
+
+    <van-tab title="纸张网纱">
+      <!-- 轮播图 -->
+      <view class="index-carousel">
+        <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
+          <block wx:for='{{indexImgs}}' wx:key=''>
+            <swiper-item class="banner-item">
+              <view class='img-box'>
+                <image src='{{item}}' bindtap='toProdPage' class='banner'></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <!-- 轮播结束 -->
+
+      <!-- 中间的图片 -->
+      <image class="head-img" src="../../images/index-img/carousel-2.jpg"></image>
+
+      <!-- 商城热卖 -->
+      <block>
+        <view class='hot-sale'>
+          <view class='hotsale-item-cont' wx:for="{{[1,2,3]}}">
+            <block>
+              <view class='prod-items' bindtap='toProdPage'>
+                <view class='hot-imagecont'>
+                  <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+                </view>
+                <view class='hot-text'>
+                  <view class='hotprod-text'>好货</view>
+                  <view class='prod-info'>哈哈哈哈</view>
+                  <view class='prod-text-info'>
+                    <view class='price'>
+                      <text class='symbol'>￥</text>
+                      <text class='big-num'>5</text>
+                      <text class='small-num'>.12</text>
+                    </view>
+                    <!-- <view class='singal-price'>
+                      <text>￥</text>
+                      <text>{{prod.oriPrice}}</text>
+                    </view> -->
+                    <image src='../../images/cart.png' class='basket-img'></image>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    
+    
+    </van-tab>
+    <van-tab title="丝带拉花">
+      <!-- 轮播图 -->
+      <view class="index-carousel">
+        <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
+          <block wx:for='{{indexImgs}}' wx:key=''>
+            <swiper-item class="banner-item">
+              <view class='img-box'>
+                <image src='{{item}}' bindtap='toProdPage' class='banner'></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <!-- 轮播结束 -->
+
+      <!-- 中间的图片 -->
+      <image class="head-img" src="../../images/index-img/carousel-2.jpg"></image>
+
+      <!-- 商城热卖 -->
+      <block>
+        <view class='hot-sale'>
+          <view class='hotsale-item-cont' wx:for="{{[1,2,3]}}">
+            <block>
+              <view class='prod-items' bindtap='toProdPage'>
+                <view class='hot-imagecont'>
+                  <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+                </view>
+                <view class='hot-text'>
+                  <view class='hotprod-text'>好货</view>
+                  <view class='prod-info'>哈哈哈哈</view>
+                  <view class='prod-text-info'>
+                    <view class='price'>
+                      <text class='symbol'>￥</text>
+                      <text class='big-num'>5</text>
+                      <text class='small-num'>.12</text>
+                    </view>
+                    <!-- <view class='singal-price'>
+                      <text>￥</text>
+                      <text>{{prod.oriPrice}}</text>
+                    </view> -->
+                    <image src='../../images/cart.png' class='basket-img'></image>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    
+    </van-tab>
+    <van-tab title="精品花盒">
+      <!-- 轮播图 -->
+      <view class="index-carousel">
+        <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
+          <block wx:for='{{indexImgs}}' wx:key=''>
+            <swiper-item class="banner-item">
+              <view class='img-box'>
+                <image src='{{item}}' bindtap='toProdPage' class='banner'></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <!-- 轮播结束 -->
+
+      <!-- 中间的图片 -->
+      <image class="head-img" src="../../images/index-img/carousel-2.jpg"></image>
+
+      <!-- 商城热卖 -->
+      <block>
+        <view class='hot-sale'>
+          <view class='hotsale-item-cont' wx:for="{{[1,2,3]}}">
+            <block>
+              <view class='prod-items' bindtap='toProdPage'>
+                <view class='hot-imagecont'>
+                  <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+                </view>
+                <view class='hot-text'>
+                  <view class='hotprod-text'>好货</view>
+                  <view class='prod-info'>哈哈哈哈</view>
+                  <view class='prod-text-info'>
+                    <view class='price'>
+                      <text class='symbol'>￥</text>
+                      <text class='big-num'>5</text>
+                      <text class='small-num'>.12</text>
+                    </view>
+                    <!-- <view class='singal-price'>
+                      <text>￥</text>
+                      <text>{{prod.oriPrice}}</text>
+                    </view> -->
+                    <image src='../../images/cart.png' class='basket-img'></image>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    
+    </van-tab>
+    <van-tab title="婚庆气球">
+      <!-- 轮播图 -->
+      <view class="index-carousel">
+        <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
+          <block wx:for='{{indexImgs}}' wx:key=''>
+            <swiper-item class="banner-item">
+              <view class='img-box'>
+                <image src='{{item}}' bindtap='toProdPage' class='banner'></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <!-- 轮播结束 -->
+
+      <!-- 中间的图片 -->
+      <image class="head-img" src="../../images/index-img/carousel-2.jpg"></image>
+
+      <!-- 商城热卖 -->
+      <block>
+        <view class='hot-sale'>
+          <view class='hotsale-item-cont' wx:for="{{[1,2,3]}}">
+            <block>
+              <view class='prod-items' bindtap='toProdPage'>
+                <view class='hot-imagecont'>
+                  <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+                </view>
+                <view class='hot-text'>
+                  <view class='hotprod-text'>好货</view>
+                  <view class='prod-info'>哈哈哈哈</view>
+                  <view class='prod-text-info'>
+                    <view class='price'>
+                      <text class='symbol'>￥</text>
+                      <text class='big-num'>5</text>
+                      <text class='small-num'>.12</text>
+                    </view>
+                    <!-- <view class='singal-price'>
+                      <text>￥</text>
+                      <text>{{prod.oriPrice}}</text>
+                    </view> -->
+                    <image src='../../images/cart.png' class='basket-img'></image>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    
+    </van-tab>
+    <van-tab title="开业用品">
+      <!-- 轮播图 -->
+      <view class="index-carousel">
+        <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots previous-margin='20rpx' next-margin='20rpx'>
+          <block wx:for='{{indexImgs}}' wx:key=''>
+            <swiper-item class="banner-item">
+              <view class='img-box'>
+                <image src='{{item}}' bindtap='toProdPage' class='banner'></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <!-- 轮播结束 -->
+
+      <!-- 中间的图片 -->
+      <image class="head-img" src="../../images/index-img/carousel-2.jpg"></image>
+
+      <!-- 商城热卖 -->
+      <block>
+        <view class='hot-sale'>
+          <view class='hotsale-item-cont' wx:for="{{[1,2,3]}}">
+            <block>
+              <view class='prod-items' bindtap='toProdPage'>
+                <view class='hot-imagecont'>
+                  <image src='../../images/index-img/carousel-3.jpg' class='hotsaleimg'></image>
+                </view>
+                <view class='hot-text'>
+                  <view class='hotprod-text'>好货</view>
+                  <view class='prod-info'>哈哈哈哈</view>
+                  <view class='prod-text-info'>
+                    <view class='price'>
+                      <text class='symbol'>￥</text>
+                      <text class='big-num'>5</text>
+                      <text class='small-num'>.12</text>
+                    </view>
+                    <!-- <view class='singal-price'>
+                      <text>￥</text>
+                      <text>{{prod.oriPrice}}</text>
+                    </view> -->
+                    <image src='../../images/cart.png' class='basket-img'></image>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    
+    </van-tab>
+  </van-tabs>
   </view>
   
-
 </view>
