@@ -73,16 +73,17 @@ var getToken = function() {
       // 发送 res.code 到后台换取 openId, sessionKey, unionId
       request({
         login: true,
-        url: '/login?grant_type=mini_app',
+        url: '/api/account/login/',
         data: {
-          principal: res.code
+          code: res.code
         },
         callBack: result => {
           // 没有获取到用户昵称，说明服务器没有保存用户的昵称，也就是用户授权的信息并没有传到服务器
-          if (!result.nickName) {
+          const res = result.data.data;
+          if (!res.nick_name) {
             updateUserInfo();
           }
-          if (result.userStutas == 0) {
+          if (!res.user_status) {
             wx.showModal({
               showCancel: false,
               title: '提示',
@@ -90,7 +91,7 @@ var getToken = function() {
             })
             wx.setStorageSync('token', '');
           } else {
-            wx.setStorageSync('token', 'bearer' + result.access_token); //把token存入缓存，请求接口数据时要用
+            wx.setStorageSync('token', res.access_token); //把token存入缓存，请求接口数据时要用
           }
           var globalData = getApp().globalData;
           globalData.isLanding = false;
@@ -110,11 +111,10 @@ function updateUserInfo() {
     success: (res) => {
       var userInfo = JSON.parse(res.rawData)
       request({
-        url: "/p/user/setUserInfo",
+        url: "/api/account/userInfo/",
         method: "PUT",
         data: {
-          avatarUrl: userInfo.avatarUrl,
-          nickName: userInfo.nickName
+          user_info: userInfo
         }
       });
     }

@@ -7,7 +7,9 @@
     "pages/sousuo-page/sousuo-page",
     "pages/classify/classify",
     "pages/recent-news/recent-news",
-    "pages/prod/prod"
+    "pages/prod/prod",
+    "pages/login/login"
+    
 
     
   ],

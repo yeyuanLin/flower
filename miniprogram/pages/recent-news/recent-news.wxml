@@ -5,7 +5,7 @@
     <view class='news-item' bindtap='toNewsDetail' data-id="{{item.id}}">
       <view class='news-item-title'>{{item.title}}</view>
       <view class='news-item-date'>
-        {{"item.publishTime"}} 这是消息页
+        {{item.gmt_modified}}
       </view>
     </view>
    </block>
