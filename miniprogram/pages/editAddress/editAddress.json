@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-button": "vant-weapp/button/index"
+  },
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "编辑收货地址",
+  "navigationBarTextStyle": "black"
+}

@@ -1,11 +1,34 @@
 
 <view class='container'>
 
- <view class="sousuo-serch">
-    <van-search value="{{ value }}" placeholder="请输入你要搜索的内容" />
+ <!-- <view class="sousuo-serch">
+    <van-search value="{{ prodName }}" placeholder="请输入你要搜索的内容" bindconfirm='toSearchProdPage' bind:search="getSearchContent"/>
+  </view> -->
+  <view class='search-bar'>
+    <view class='search-box'>
+      <input placeholder="请输入你要搜索的内容" class='sear-input'confirm-type='search' bindconfirm='toSearchProdPage' bindinput='getSearchContent' value='{{prodName}}'></input>
+      <!-- <image src='../../images/icon/search.png' class='search-img'></image> -->
+      <view class='search-img'>
+        <van-icon name="search" />
+      </view>
+      
+    </view>
+    <text class='search-hint' bindtap='goBackIndex'>取消</text>
   </view>
 
   <view class='search-display'>
+    <!-- 热门搜索 -->
+    <view class='hot-search'>
+      <view class='title-text'>
+        搜索发现
+      </view>
+      <view class='hot-search-tags'>
+       <block wx:for='{{hotSearchList}}' wx:key=''>
+        <text class='tags' bindtap='onHistSearch' >{{item}}</text>
+        </block> 
+      </view>  
+    </view>
+
     <!-- 搜索历史 -->
     <view class='history-search'>
       <view class='title-text history-line'>
@@ -21,20 +44,5 @@
       </block>
       
     </view>
-
-    <!-- 热门搜索 -->
-    <view class='hot-search'>
-      <view class='title-text'>
-        搜索发现
-      </view>
-      <view class='hot-search-tags'>
-       <block wx:for='{{hotSearchList}}' wx:key=''>
-        <text class='tags' bindtap='onHistSearch' >{{item}}</text>
-        </block> 
-      </view>
-    
-    </view>
-
-    
   </view>
 </view>

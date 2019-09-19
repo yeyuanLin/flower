@@ -56,7 +56,7 @@ Page({
   // 跳转搜索页
   toSearchPage: function () {
     wx.navigateTo({
-      url: '/pages/search-page/search-page',
+      url: '/pages/sousuo-page/sousuo-page',
     })
   },
 

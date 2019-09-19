@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-button": "vant-weapp/button/index"
+  },
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "绑定手机号码",
+  "navigationBarTextStyle": "black"
+}

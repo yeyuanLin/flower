@@ -7,8 +7,21 @@
     "pages/sousuo-page/sousuo-page",
     "pages/classify/classify",
     "pages/recent-news/recent-news",
+    "pages/news-detail/news-detail",
     "pages/prod/prod",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/logs/logs",
+    "pages/delivery-address/delivery-address",
+    "pages/editAddress/editAddress",
+    "pages/orderList/orderList",
+    "pages/order-detail/order-detail",
+    "pages/submit-order/submit-order",
+    "pages/binding-phone/binding-phone",
+    "pages/express-delivery/express-delivery",
+    "pages/pay-result/pay-result",
+    "pages/search-prod-show/search-prod-show",
+    "components/production/production",
+    "components/coupon/coupon"
     
 
     

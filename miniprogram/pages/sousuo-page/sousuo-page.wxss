@@ -1,16 +1,63 @@
-/* 搜索框的宽度 */
-.sousuo-serch {
+/* pages/search-page/search-page.wxss */
+
+/* 搜索栏 */
+
+.search-bar {
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #777;
+  background: #fff;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.07);
+  z-index: 3;
+}
+
+.search-bar .search-box {
+  position: relative;
+  height: 60rpx;
+  background: #f7f7f7;
+  z-index: 999;
+  width: 80%;
+  margin-left: 70rpx;
+  border-radius: 10rpx;
+  margin: 20rpx 0 20rpx 20rpx;
+}
+
+.sear-input {
+  height: 60rpx;
+  border-radius: 50rpx;
+  border: 0;
+  margin: 0 30rpx 0 64rpx;
+  line-height: 48rpx;
+  vertical-align: top;
+  background: #f7f7f7;
+  font-size: 28rpx;
+}
+
+.search-bar .search-hint {
+  font-size: 28rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 31rpx;
+  color: #eb2444;
+}
+
+.search-bar .search-box .search-img {
+  width: 32rpx;
+  height: 32rpx;
+  position: absolute;
+  left: 20rpx;
+  top: 14rpx;
+  display: block;
 }
 
 /* 热门搜索&搜索历史 */
 
 .search-display {
-  width: 100%;
   background: #fff;
-  /* padding: 20rpx; */
-  padding-left: 100rpx;
-  /* margin-top: 100rpx; */
+  padding: 20rpx;
+  margin-top: 100rpx;
 }
 
 .search-display .title-text {
@@ -75,5 +122,4 @@
   position: absolute;
   right: 10rpx;
   top: 30rpx;
-} 
-
+}
