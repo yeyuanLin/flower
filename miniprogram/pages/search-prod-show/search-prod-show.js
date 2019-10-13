@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sts: 0,
+    sts: '',
     showType: 2,
     searchProdList: [],
     prodName: "",
@@ -65,13 +65,12 @@ Page({
       data: {
         page: this.data.prodPage,
         search:this.data.prodName,
+        ordering:this.data.sts,
       },
       callBack: (res)=> {
-        console.log(res);
         this.setData({
           searchProdList: res.data.results,
         });
-        console.log(this.data.searchProdList);
       },
     };
     http.request(params);
@@ -122,8 +121,24 @@ Page({
  */
   onStsTap: function (e) {
     var sts = e.currentTarget.dataset.sts;
+    var ordering;
+    if (sts == 0){
+      ordering = '';
+    } else if (sts == 1) {
+      if (this.data.sts == 'sold_num' || this.data.sts == '-sold_num'){
+        ordering = 'sold_num' == this.data.sts ? '-sold_num' :'sold_num;' 
+      } else {
+        ordering = 'sold_num';
+      }
+    } else if (sts == 2) {
+      if (this.data.sts == 'price' || this.data.sts == '-price'){
+        ordering = 'price' == this.data.sts?'-price':'price';
+      } else {
+        ordering = 'price'
+      }
+    }
     this.setData({
-      sts: sts
+      sts: ordering
     });
     this.toLoadData();
   },
