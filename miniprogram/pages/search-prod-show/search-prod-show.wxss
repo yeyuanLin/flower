@@ -160,9 +160,10 @@ page {
 }
 
 .prod-list .cont-item .show-item .prod-text-right .cate-prod-info {
+  height: 54rpx;
   font-size: 22rpx;
   color: #999;
-  margin: 10rpx 0 20rpx 0;
+  margin: 3rpx 0 20rpx 0;
 }
 
 .prod-list .cont-item .show-item .prod-text-right .go-to-buy {
@@ -180,7 +181,7 @@ page {
 
 .prod-list .cont-item .show-item .prod-text-right .prod-text.more {
   margin: 0;
-  height: 78rpx;
+  height: 64rpx;
   font-size: 28rpx;
   display: -webkit-box;
   word-break: break-all;

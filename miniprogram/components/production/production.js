@@ -1,5 +1,12 @@
 // components/production/production.js
-Page({
+Component({
+  /**
+ * 组件的属性列表
+ */
+  properties: {
+    item: Object,
+    sts: Number,
+  },
 
   /**
    * 页面的初始数据
@@ -62,5 +69,11 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  toProdPage: function (e) {
+    var prodid = e.currentTarget.dataset.prodid;
+    wx.navigateTo({
+      url: '/pages/prod/prod?prodid=' + prodid,
+    })
+  },
 })

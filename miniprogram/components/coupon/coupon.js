@@ -1,5 +1,5 @@
 // components/coupon/coupon.js
-Page({
+Component({
 
   /**
    * 页面的初始数据

@@ -1,16 +1,24 @@
 // pages/prod/prod.js
+const app = getApp()
+var http = require('../../utils/http.js');
+var config = require('../../utils/config.js');
+var util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    indexImgs: ["../../images/index-img/carousel-1.jpg", "../../images/index-img/carousel-2.jpg", "../../images/index-img/carousel-3.jpg"],
-    prodName:"",
+    prodId: 0,
     isCollection: true,
     couponList:[1,2],
-    littleCommPage:[1,2,3,4,5],
+    littleCommPage: [1,2,3,4,5],
     skuShow:false,
+    commodityInfo: {},
+    prodNum: 1,
+    popupShow: false,
+    selectedSkuId: null,
+    selectedProp: [],
 
   },
   /**
@@ -37,7 +45,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
+    this.setData({
+      prodId: options.prodid,
+    });
+    this.getData();
+  },
+  getData(){
+    // wx.showLoading();
+    var params = {
+      url: '/api/commodity/commodity/',
+      method: "GET",
+      data: {
+        id: this.data.prodId
+      },
+      callBack:(res)=>{
+        console.log(res);
+        if(res.code == "ok"){
+          this.setData({
+            commodityInfo:res.data
+          })
+        }
+      }
+    }
+    http.request(params);
   },
 
   /**
@@ -104,5 +135,49 @@ Page({
     wx.switchTab({
       url: '/pages/cart/cart',
     })
+  },
+  //打开规格窗口
+  showSku() {
+    this.setData({
+      skuShow: true
+    });
+  },
+  // 关闭弹窗
+  closePopup: function () {
+    this.setData({
+      popupShow: false,
+      skuShow: false,
+      commentShow: false
+    });
+  },
+  // 
+  toChooseItem(e) {
+    var item = e.currentTarget.dataset.val;
+    this.data.commodityInfo.specification.forEach((value, index) => {
+      if (item.id==value.id) {
+        this.setData({
+          selectedSkuId: value.id,
+          selectedProp: value.name
+        });
+      }
+    });
+  },
+  // 数量减
+  onCountMinus() {
+    var prodNum = this.data.prodNum;
+    if (prodNum > 1) {
+      this.setData({
+        prodNum: prodNum - 1
+      });
+    }
+  },
+  // 数量加
+  onCountPlus() {
+    var prodNum = this.data.prodNum;
+    if (prodNum < 1000) {
+      this.setData({
+        prodNum: prodNum + 1
+      });
+    }
   }
 })

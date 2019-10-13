@@ -38,12 +38,9 @@ Page({
 
   toProdPage: function (e) {
     var prodid = e.currentTarget.dataset.prodid;
-    // if (prodid) {
-      wx.navigateTo({
-        // url: '/pages/prod/prod?prodid=' + prodid,
-        url: '/pages/prod/prod',
-      })
-    // }
+    wx.navigateTo({
+      url: '/pages/prod/prod?prodid=' + prodid,
+    })
   },
 
   toCouponCenter: function () {

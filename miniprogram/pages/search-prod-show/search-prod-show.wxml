@@ -47,7 +47,7 @@
           </view>
           <view class='prod-text-right'>
             <view class='prod-text more'>{{item.name}}</view>
-            <view class='cate-prod-info'>{{item.brief}}评价 {{item.positiveRating}}%好评</view>
+            <view class='cate-prod-info'>{{item.brief}}</view>
             <view class='prod-price more'>
               <text class='symbol'>￥</text>
               <text class='big-num'>{{wxs.parsePrice(item.price)[0]}}</text>

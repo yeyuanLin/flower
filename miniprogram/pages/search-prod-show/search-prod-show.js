@@ -11,6 +11,7 @@ Page({
     showType: 2,
     searchProdList: [],
     prodName: "",
+    prodPage: 1,
   },
 
   changeShowType: function () {
@@ -57,21 +58,20 @@ Page({
 
   //请求商品接口
   toLoadData: function () {
-    var ths = this;
     //热门搜索
     var params = {
       url: "/api/commodity/list/",
       method: "GET",
       data: {
-        tag:"1",
-        category:"this.data.prodName",
-        page_size:"10",
-        ordering:"this.data.sts"
+        page: this.data.prodPage,
+        search:this.data.prodName,
       },
-      callBack: function (res) {
-        ths.setData({
-          searchProdList: res.records,
+      callBack: (res)=> {
+        console.log(res);
+        this.setData({
+          searchProdList: res.data.results,
         });
+        console.log(this.data.searchProdList);
       },
     };
     http.request(params);
@@ -131,8 +131,7 @@ Page({
   toProdPage: function (e) {
     var prodid = e.currentTarget.dataset.prodid;
     wx.navigateTo({
-      // url: '/pages/prod/prod?prodid=' + prodid,
-      url: '/pages/prod/prod/'
+      url: '/pages/prod/prod?prodid=' + prodid,
     })
   },
 })

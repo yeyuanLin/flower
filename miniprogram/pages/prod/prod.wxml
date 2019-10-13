@@ -3,7 +3,7 @@
   <!-- 轮播图 -->
   <!-- <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" indicator-color="{{indicatorColor}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}"> -->
   <swiper autoplay="true" indicator-color="#f00" interval="2000" duration="1000" indicator-active-color="#ff0 " circular='true' class='pic-swiper' indicator-dots>
-    <block wx:for="{{indexImgs}}" wx:key='*this'>
+    <block wx:for="{{commodityInfo.images}}" wx:key='*this'>
       <swiper-item>
         <image src='{{item}}'></image>
       </swiper-item>
@@ -15,16 +15,16 @@
   <!-- <block wx:for="{{imgs}}" wx:key=''> -->
   <view class='prod-info'>
     <view class="tit-wrap">
-      <view class="prod-tit">{{"prodName"}}</view>
+      <view class="prod-tit">{{commodityInfo.name}}</view>
       <view class="col" bindtap='addOrCannelCollection'>
         <image wx-if="{{!isCollection}}" src="../../images/icon/prod-col.png"></image>
         <image wx-if="{{isCollection}}" src="../../images/icon/prod-col-red.png"></image>
         收藏
       </view>
     </view>
-    <view class="sales-p">{{"brief"}}</view>
+    <view class="sales-p">{{commodityInfo.brief}}</view>
     <view class="prod-price">
-      <text class="price">￥<text class="price-num">{{wxs.parsePrice(defaultSku.price)[0]}}</text>.{{wxs.parsePrice(defaultSku.price)[1]}}</text>
+      <text class="price">￥<text class="price-num">{{wxs.parsePrice(commodityInfo.price)[0]}}</text>.{{wxs.parsePrice(commodityInfo.price)[1]}}</text>
       <text class="sales"></text>
     </view>
     <!-- <button class="share-icon" open-type="share">
@@ -52,8 +52,8 @@
   <!-- 已选规格 -->
   <view class="sku" bindtap='showSku'>
     <view class="sku-tit">已选</view>
-    <!-- <view class="sku-con">{{selectedProp.length>0?selectedProp+'，':selectedProp}}{{prodNum}}件</view> -->
-    <view class="sku-con">{{1}}件</view>
+    <view class="sku-con">{{selectedProp.length>0?selectedProp+'，':selectedProp}}{{prodNum}}件</view>
+    <!-- <view class="sku-con">{{prodNum}}件</view> -->
     <view class="more">...</view>
   </view>
   <!-- 评价 -->
@@ -175,10 +175,10 @@
   <view class="pup-sku" wx:if="{{skuShow}}">
     <view class="pup-sku-main">
       <view class='pup-sku-header'>
-        <image class="pup-sku-img" src="{{defaultSku.pic?defaultSku.pic:pic}}"></image>
+        <image class="pup-sku-img" src="{{commodityInfo.pic}}"></image>
         <view class="pup-sku-price">
           ￥
-          <text class="pup-sku-price-int">{{wxs.parsePrice(defaultSku.price)[0]}}</text> .{{wxs.parsePrice(defaultSku.price)[1]}}
+          <text class="pup-sku-price-int">{{wxs.parsePrice(commodityInfo.price)[0]}}</text> .{{wxs.parsePrice(commodityInfo.price)[1]}}
         </view>
         <view class='pup-sku-prop'>
           <text>已选</text> {{selectedProp.length>0?selectedProp+'，':selectedProp}}{{prodNum}}件
@@ -187,12 +187,13 @@
       </view>
       <view class='pup-sku-body'>
         <view class="pup-sku-area">
-          <block wx:for="{{skuGroup}}" wx:for-index="key" wx:for-item="value" wx:key='*this'>
-            <view class='sku-kind'>{{key}}</view>
+          <block wx:if="{{commodityInfo.specification}}">
+            <view class='sku-kind'>规格</view>
             <view class='sku-choose'>
-              <block wx:for="{{value}}" wx:key='*this'>
-                <text class="sku-choose-item {{wxs.array_contain(selectedProp,item)?'active':''}} {{wxs.props_contain(allProperties,selectedPropObj,key,item,propKeys)?'':'gray'}}" data-ok="{{wxs.props_contain(allProperties,selectedPropObj,key,item,propKeys)}}" bindtap='toChooseItem'
-                  data-key="{{key}}" data-val="{{item}}">{{item}}</text>
+              <block wx:for="{{commodityInfo.specification}}" wx:key="index">
+                <!-- 无货加class 'gray'（TODO） -->
+                <text class="sku-choose-item {{selectedSkuId==item.id?'active':''}}" bindtap='toChooseItem'
+                  data-key="{{key}}" data-val="{{item}}">{{item.name}}</text>
               </block>
             </view>
           </block>
