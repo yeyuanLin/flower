@@ -58,7 +58,7 @@ Page({
 
   //请求商品接口
   toLoadData: function () {
-    //热门搜索
+    wx.showLoading()
     var params = {
       url: "/api/commodity/list/",
       method: "GET",
@@ -71,6 +71,7 @@ Page({
         this.setData({
           searchProdList: res.data.results,
         });
+        wx.hideLoading()
       },
     };
     http.request(params);

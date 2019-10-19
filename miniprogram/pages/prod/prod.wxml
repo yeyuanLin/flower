@@ -17,8 +17,8 @@
     <view class="tit-wrap">
       <view class="prod-tit">{{commodityInfo.name}}</view>
       <view class="col" bindtap='addOrCannelCollection'>
-        <image wx-if="{{!isCollection}}" src="../../images/icon/prod-col.png"></image>
-        <image wx-if="{{isCollection}}" src="../../images/icon/prod-col-red.png"></image>
+        <image wx-if="{{!commodityInfo.is_collect}}" src="../../images/icon/prod-col.png"></image>
+        <image wx-if="{{commodityInfo.is_collect}}" src="../../images/icon/prod-col-red.png"></image>
         收藏
       </view>
     </view>

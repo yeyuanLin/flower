@@ -25,20 +25,24 @@ Page({
    * 添加或者取消收藏商品 
    */
   addOrCannelCollection() {
-    // wx.showLoading();
+    wx.showLoading();
 
-    // var params = {
-      // url: "/p/user/collection/addOrCancel",
-      // method: "POST",
-      // data: this.data.prodId,
-      // callBack: (res) => {
-        // this.setData({
-          // isCollection: !this.data.isCollection
-        // })
-        // wx.hideLoading();
-      // }
-    // };
-    // http.request(params);
+    var params = {
+      url: "/api/commodity/collect/",
+      method: "POST",
+      data: {id: this.data.prodId},
+      callBack: (res) => {
+        if (res.code == "ok"){
+          const commodityInfo = this.data.commodityInfo;
+          commodityInfo.is_collect = res.data;
+          this.setData({
+            commodityInfo: commodityInfo
+          })
+          wx.hideLoading();
+        }
+      }
+    };
+    http.request(params);
   },
 
   /**
@@ -52,7 +56,7 @@ Page({
     this.getData();
   },
   getData(){
-    // wx.showLoading();
+    wx.showLoading();
     var params = {
       url: '/api/commodity/commodity/',
       method: "GET",
@@ -65,6 +69,7 @@ Page({
           this.setData({
             commodityInfo:res.data
           })
+          wx.hideLoading();
         }
       }
     }
