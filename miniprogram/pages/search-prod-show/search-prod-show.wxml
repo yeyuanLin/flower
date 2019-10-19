@@ -22,8 +22,8 @@
     </view>
     <view class='tabs'>
       <text class="tab-item complete {{sts==''?'on':''}}" bindtap='onStsTap' data-sts="0">综合</text>
-      <text class="tab-item {{sts=='sold_num'?'on':''}}" bindtap='onStsTap' data-sts="1">销量</text>
-      <text class="tab-item {{sts=='price'?'on':''}}" bindtap='onStsTap' data-sts="2">价格</text>
+      <text class="tab-item {{sts=='sold_num'||sts=='-sold_num'?'on':''}}" bindtap='onStsTap' data-sts="1">销量</text>
+      <text class="tab-item {{sts=='price'||sts=='-price'?'on':''}}" bindtap='onStsTap' data-sts="2">价格</text>
     </view>
   </view>
 

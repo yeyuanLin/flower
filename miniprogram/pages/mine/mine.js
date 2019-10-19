@@ -64,5 +64,19 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /**
+   * 我的收藏跳转
+   */
+  myCollectionHandle: function () {
+    var url = '/api/account/collect/';
+    var id = 0;
+    var title = "我的收藏商品";
+    if (id) {
+      url += "&tagid=" + id + "&title=" + title;
+    }
+    wx.navigateTo({
+      url: url
+    })
   }
 })

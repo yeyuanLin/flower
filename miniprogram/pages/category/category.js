@@ -7,11 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    categoryList:[
-      { categoryId: 0, categoryName: "纸张" },
-      { categoryId: 1, categoryName: "丝带" },
-      { categoryId: 2, categoryName: "花盒" },
-      ],
+    categoryList:[],
     selIndex: 0,
     productList: [
       {
@@ -30,24 +26,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var ths = this;
-    // //加载分类列表
-    // var params = {
-    //   url: "/category/categoryInfo",
-    //   method: "GET",
-    //   data: {
-    //     parentId: ''
-    //   },
-    //   callBack: function (res) {
-    //     // console.log(res);
-    //     ths.setData({
-    //       categoryImg: res[0].pic,
-    //       categoryList: res,
-    //     });
-    //     ths.getProdList(res[0].categoryId)
-    //   }
-    // };
-    // http.request(params);
+    var ths = this;
+    //加载分类列表
+    var params = {
+      url: "/api/commodity/category/",
+      method: "GET",
+      callBack: function (res) {
+        if (res.code == "ok") {
+          ths.setData({
+            categoryImg: res.data[0].pic,
+            categoryList: res.data,
+          });
+          ths.getProdList(res.data[0].id)
+        }
+      }
+    };
+    http.request(params);
   },
 
   /**
@@ -123,28 +117,30 @@ Page({
     })
   },
   getProdList(categoryId) {
-    // //加载分类列表
-    // var params = {
-    //   url: "/prod/pageProd",
-    //   method: "GET",
-    //   data: {
-    //     categoryId: categoryId
-    //   },
-    //   callBack: (res) => {
-    //     // console.log(res);
-    //     this.setData({
-    //       productList: res.records,
-    //     });
-    //   }
-    // };
-    // http.request(params);
+    //加载分类下的商品
+    var params = {
+      url: "/api/commodity/list/",
+      method: "GET",
+      data: {
+        category: categoryId
+      },
+      callBack: (res) => {
+        if (res.code == "ok") {
+          console.log(res);
+          this.setData({
+            productList: res.data.results,
+          });
+        }
+      }
+    };
+    http.request(params);
   },
 
   //跳转商品详情页
   toProdPage: function (e) {
-    // var prodid = e.currentTarget.dataset.prodid;
-    // wx.navigateTo({
-    //   url: '/pages/prod/prod?prodid=' + prodid,
-    // })
+    var prodid = e.currentTarget.dataset.prodid;
+    wx.navigateTo({
+      url: '/pages/prod/prod?prodid=' + prodid,
+    })
   },
 })

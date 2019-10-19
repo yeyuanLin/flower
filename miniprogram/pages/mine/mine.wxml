@@ -51,7 +51,7 @@
 
     <view class="prod-col">
       <view class="col-item" bindtap='myCollectionHandle'>
-        <view class="num">{{"collectionCount"}}</view>
+        <view class="num">{{collectionCount}}</view>
         <view class="tit">我的收藏</view>
       </view>
       <view class="col-item">
@@ -65,13 +65,13 @@
     </view>
 
     <view class='my-menu'>
-      <view class='memu-item' bindtap='toDistCenter'>
+      <!-- <view class='memu-item' bindtap='toDistCenter'>
         <view class="i-name">
           <image src='../../images/cart.png'></image>
           <text>分销中心</text>
         </view>
         <view class='arrowhead'></view>
-      </view>
+      </view> -->
       <view class='memu-item' bindtap='toCouponCenter'>
         <view class="i-name">
           <image src='../../images/cart.png'></image>

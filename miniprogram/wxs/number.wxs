@@ -10,7 +10,7 @@ function parsePrice(val){
   if (!val) {
     val = 0;
   }
-  return val.split(".");
+  return val.toString().split(".");
 }
 
 function array_contain(array, obj) {

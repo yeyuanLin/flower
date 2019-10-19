@@ -127,7 +127,7 @@ Page({
       ordering = '';
     } else if (sts == 1) {
       if (this.data.sts == 'sold_num' || this.data.sts == '-sold_num'){
-        ordering = 'sold_num' == this.data.sts ? '-sold_num' :'sold_num;' 
+        ordering = 'sold_num' == this.data.sts ? '-sold_num' :'sold_num';
       } else {
         ordering = 'sold_num';
       }
@@ -138,10 +138,13 @@ Page({
         ordering = 'price'
       }
     }
+    console.log(ordering)
     this.setData({
       sts: ordering
     });
-    this.toLoadData();
+    if (ordering) {
+      this.toLoadData();
+    }
   },
 
   toProdPage: function (e) {

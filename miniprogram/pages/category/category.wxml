@@ -12,15 +12,15 @@
     </view>
   </view> -->
   <view class="index-serch" bindtap='toSearchPage'>
-    <van-search value="{{ value }}" placeholder="礼花" />
+    <van-search value="{{ value }}" placeholder="搜索您想要的商品" />
   </view>
 <!-- 滚动内容区 -->
   <view class="main">
     <!-- 左侧菜单start -->
     <scroll-view scroll-y="true" class='leftmenu'>
-      <block wx:for='{{ categoryList}}' wx:key=''>
-        <view class='menu-item {{selIndex==index?"active":""}} ' data-index="{{index}}" data-id="{{item.categoryId}}" bindtap='onMenuTab'>
-          {{item.categoryName}}
+      <block wx:for='{{ categoryList }}' wx:key=''>
+        <view class='menu-item {{selIndex==index?"active":""}} ' data-index="{{index}}" data-id="{{item.id}}" bindtap='onMenuTab'>
+          {{item.name}}
         </view>
       </block>
     </scroll-view>
@@ -36,15 +36,15 @@
       </view>
       <view class='cont-item'>
         <block wx:for='{{productList}}' wx:key=''>
-          <view class='show-item'  bindtap='toProdPage' data-prodid="{{item.prodId}}">
+          <view class='show-item'  bindtap='toProdPage' data-prodid="{{item.id}}">
             <view class='more-prod-pic'>
               <image src='{{item.pic}}' class='more-pic'mode='widthFix'></image>
             </view>
             <view class='prod-text-right'>
-              <view class='prod-text more'>item</view>
+              <view class='prod-text more'>{{item.name}}</view>
               <view class='cate-prod-info'>{{item.brief}}</view>
               <view class='prod-price more'>
-                <text class='symbol'>￥</text> <text class='big-num'>123</text><text class='small-num'>.45</text> 
+                <text class='symbol'>￥</text> <text class='big-num'>{{wxs.parsePrice(item.price)[0]}}</text><text class='small-num'>.{{wxs.parsePrice(item.price)[1]}}</text> 
               </view>
             </view>
           </view>
