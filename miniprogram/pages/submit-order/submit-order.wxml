@@ -34,14 +34,14 @@
           </view>
           <view class='prod-info'>
             <view class='prodname'>
-              {{item.prodName}}
+              {{item.name}}
             </view>
-            <view class='prod-info-cont'>{{item.skuName}}</view>
+            <view class='prod-info-cont'>{{item.specification}}</view>
             <view class='price-nums'>
               <text class='prodprice'><text class='symbol'>￥</text>
               <text class='big-num'>{{wxs.parsePrice(item.price)[0]}}</text>
               <text class='small-num'>.{{wxs.parsePrice(item.price)[1]}}</text></text>
-              <text class="prodcount">x{{item.prodCount}}</text>
+              <text class="prodcount">x{{item.count}}</text>
             </view>
           </view>
         </view>
@@ -65,11 +65,11 @@
       </view> -->
 
       <view class='total-num'>
-        <text class="prodcount">共{{totalCount}}件商品</text>
+        <text class="prodcount">共{{count}}件商品</text>
         <view class='prodprice'>合计：
           <text class='symbol'>￥</text>
-          <text class='big-num'>{{wxs.parsePrice(total)[0]}}</text>
-          <text class='small-num'>.{{wxs.parsePrice(total)[1]}}</text>
+          <text class='big-num'>{{wxs.parsePrice(prodTotal)[0]}}</text>
+          <text class='small-num'>.{{wxs.parsePrice(prodTotal)[1]}}</text>
         </view>
       </view>
     </view>
@@ -97,32 +97,32 @@
           <view class='item-tit'>订单总额：</view>
           <view class='item-txt price'>
             <text class='symbol'>￥</text>
-            <text class='big-num'>{{wxs.parsePrice(total)[0]}}</text>
-            <text class='small-num'>.{{wxs.parsePrice(total)[1]}}</text>
+            <text class='big-num'>{{wxs.parsePrice(prodTotal)[0]}}</text>
+            <text class='small-num'>.{{wxs.parsePrice(prodTotal)[1]}}</text>
           </view>
         </view>
         <view class='item'>
           <view class='item-tit'>运费：</view>
           <view class='item-txt price'>
             <text class='symbol'>￥</text>
-            <text class='big-num'>{{wxs.parsePrice(transfee)[0]}}</text>
-            <text class='small-num'>.{{wxs.parsePrice(transfee)[1]}}</text>
+            <text class='big-num'>{{wxs.parsePrice(freight)[0]}}</text>
+            <text class='small-num'>.{{wxs.parsePrice(freight)[1]}}</text>
           </view>
         </view>
         <view class='item'>
           <view class='item-tit'>优惠金额：</view>
           <view class='item-txt price'>
             <text class='symbol'>-￥</text>
-            <text class='big-num'>{{wxs.parsePrice(shopReduce)[0]}}</text>
-            <text class='small-num'>.{{wxs.parsePrice(shopReduce)[1]}}</text>
+            <text class='big-num'>{{wxs.parsePrice(discountedPrice)[0]}}</text>
+            <text class='small-num'>.{{wxs.parsePrice(discountedPrice)[1]}}</text>
           </view>
         </view>
         <view class='item payment'>
           <view class='item-txt price'>
             小计：
             <text class='symbol'>￥</text>
-            <text class='big-num'>{{wxs.parsePrice(actualTotal)[0]}}</text>
-            <text class='small-num'>.{{wxs.parsePrice(actualTotal)[1]}}</text>
+            <text class='big-num'>{{wxs.parsePrice(total)[0]}}</text>
+            <text class='small-num'>.{{wxs.parsePrice(total)[1]}}</text>
           </view>
         </view>
       </view>
@@ -137,8 +137,8 @@
         合计：
         <view class='price'>
           <text class='symbol'>￥</text>
-          <text class='big-num'>{{wxs.parsePrice(actualTotal)[0]}}</text>
-          <text class='small-num'>.{{wxs.parsePrice(actualTotal)[1]}}</text>
+          <text class='big-num'>{{wxs.parsePrice(total)[0]}}</text>
+          <text class='small-num'>.{{wxs.parsePrice(total)[1]}}</text>
         </view>
       </view>
     </view>

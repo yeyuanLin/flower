@@ -149,7 +149,7 @@
 </van-goods-action> -->
 <van-goods-action>
   <van-goods-action-icon icon="chat-o" text="客服" bindtap="toKefu"/>
-  <van-goods-action-icon icon="cart-o" text="购物车" info="5" bindtap="toCartPage" />
+  <van-goods-action-icon icon="cart-o" text="购物车" info="{{totalCartNum>0?totalCartNum:''}}" bindtap="toCartPage" />
   <van-goods-action-icon icon="shop-o" text="店铺" bindtap="toHomePage"/>
   <van-goods-action-button text="加入购物车" type="warning" bindtap="addToCart"/>
   <van-goods-action-button text="立即购买" bindtap="buyNow"/>
@@ -191,8 +191,7 @@
             <view class='sku-kind'>规格</view>
             <view class='sku-choose'>
               <block wx:for="{{commodityInfo.specification}}" wx:key="index">
-                <!-- 无货加class 'gray'（TODO） -->
-                <text class="sku-choose-item {{selectedSkuId==item.id?'active':''}}" bindtap='toChooseItem'
+                <text class="sku-choose-item {{selectedSkuId==item.id?'active':''}} {{item.stocks>0?'':'gray'}}" bindtap='toChooseItem'
                   data-key="{{key}}" data-val="{{item}}">{{item.name}}</text>
               </block>
             </view>
