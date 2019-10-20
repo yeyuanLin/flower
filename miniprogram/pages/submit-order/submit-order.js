@@ -55,8 +55,9 @@ Page({
         couponIds: this.data.couponIds,
       },
       callBack: res => {
-        wx.hideLoading();
-        const orderItems = res.data.prodItems;
+        if (res.code == "ok") {
+          wx.hideLoading();
+          const orderItems = res.data.prodItems;
 
         // if (res.shopCartOrders[0].coupons) {
         //   let canUseCoupons = []
@@ -86,6 +87,7 @@ Page({
           freight: res.data.freight,
           discountedPrice: res.data.discounted_price,
         });
+        }
       },
       errCallBack: res => {
         wx.hideLoading();

@@ -9,11 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // picDomain: config.picDomain,
     shopCart: [],
-    finalMoney: 0,
     totalMoney: 0,
-    subtractMoney: 0,
     allChecked: true
   },
 
@@ -60,7 +57,7 @@ Page({
               shopCart: [],
             });
           }
-          // this.calTotalPrice();//计算总价
+          this.calTotalPrice();//计算总价
           wx.hideLoading();
         }
       }
@@ -75,14 +72,16 @@ Page({
    * 去结算
    */
   toFirmOrder: function () {
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
+    var shopCart = this.data.shopCart;
     var basketIds = [];
-    shopCartItemDiscounts.forEach(shopCartItemDiscount => {
-      shopCartItemDiscount.shopCartItems.forEach(shopCartItem => {
-        if (shopCartItem.checked) {
-          basketIds.push(shopCartItem.basketId)
-        }
-      })
+    shopCart.forEach(item => {
+      if (item.checked) {
+        basketIds.push({
+          prodId: item.commodity.id,
+          skuId: item.specification ? item.specification.id : null,
+          prodCount: item.count,
+        })
+      }
     })
     if (!basketIds.length) {
       wx.showToast({
@@ -103,18 +102,15 @@ Page({
   onSelAll: function () {
     var allChecked = this.data.allChecked;
     allChecked = !allChecked; //改变状态
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
+    var shopCart = this.data.shopCart;
 
-    for (var i = 0; i < shopCartItemDiscounts.length; i++) {
-      var cItems = shopCartItemDiscounts[i].shopCartItems;
-      for (var j = 0; j < cItems.length; j++) {
-        cItems[j].checked = allChecked;
-      }
-    }
+    shopCart.forEach((item, index) => {
+      shopCart[index].checked = allChecked;
+    })
 
     this.setData({
       allChecked: allChecked,
-      shopCartItemDiscounts: shopCartItemDiscounts
+      shopCart: shopCart
     });
     this.calTotalPrice();//计算总价
   },
@@ -124,13 +120,12 @@ Page({
    */
   onSelectedItem: function (e) {
     var index = e.currentTarget.dataset.index;// 获取data- 传进来的index
-    var scindex = e.currentTarget.dataset.scindex;
 
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;// 获取购物车列表
-    var checked = shopCartItemDiscounts[scindex].shopCartItems[index].checked; // 获取当前商品的选中状态
-    shopCartItemDiscounts[scindex].shopCartItems[index].checked = !checked; // 改变状态
+    var shopCart = this.data.shopCart;// 获取购物车列表
+    var checked = shopCart[index].checked; // 获取当前商品的选中状态
+    shopCart[index].checked = !checked; // 改变状态
     this.setData({
-      shopCartItemDiscounts: shopCartItemDiscounts
+      shopCart: shopCart
     });
     this.checkAllSelected();//检查全选状态
     this.calTotalPrice();//计算总价
@@ -141,22 +136,13 @@ Page({
    */
   checkAllSelected: function () {
     var allChecked = true;
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
-
-    var flag = false;
-    for (var i = 0; i < shopCartItemDiscounts.length; i++) {
-      var cItems = shopCartItemDiscounts[i].shopCartItems;
-      for (var j = 0; j < cItems.length; j++) {
-        if (!cItems[j].checked) {
-          allChecked = !allChecked;
-          flag = true;
-          break;
-        }
+    var shopCart = this.data.shopCart;
+    shopCart.forEach((item) => {
+      if (!item.checked) {
+        allChecked = false;
+        return;
       }
-      if (flag) {
-        break;
-      }
-    }
+    })
     this.setData({
       allChecked: allChecked
     });
@@ -166,33 +152,16 @@ Page({
    * 计算购物车总额
    */
   calTotalPrice: function () {
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
-    var shopCartIds = [];
-    for (var i = 0; i < shopCartItemDiscounts.length; i++) {
-      var cItems = shopCartItemDiscounts[i].shopCartItems;
-      for (var j = 0; j < cItems.length; j++) {
-        if (cItems[j].checked) {
-          shopCartIds.push(cItems[j].basketId);
-        }
+    var shopCart = this.data.shopCart;
+    var totalMoney = 0;
+    shopCart.forEach(item => {
+      if (item.checked) {
+        totalMoney += item.count * item.price;
       }
-    }
-
-    var ths = this;
-    wx.showLoading();
-    var params = {
-      url: "/p/shopCart/totalPay",
-      method: "POST",
-      data: shopCartIds,
-      callBack: function (res) {
-        ths.setData({
-          finalMoney: res.finalMoney,
-          totalMoney: res.totalMoney,
-          subtractMoney: res.subtractMoney
-        });
-        wx.hideLoading();
-      }
-    };
-    http.request(params);
+    })
+    this.setData({
+      totalMoney: totalMoney.toFixed(2),
+    });
 
   },
 
@@ -201,11 +170,10 @@ Page({
    */
   onCountMinus: function (e) {
     var index = e.currentTarget.dataset.index;
-    var scindex = e.currentTarget.dataset.scindex;
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
-    var prodCount = shopCartItemDiscounts[scindex].shopCartItems[index].prodCount;
+    var shopCart = this.data.shopCart;
+    var prodCount = shopCart[index].count;
     if (prodCount > 1) {
-      this.updateCount(shopCartItemDiscounts, scindex, index, -1);
+      this.updateCount(index, -1);
     }
   },
 
@@ -214,33 +182,31 @@ Page({
    */
   onCountPlus: function (e) {
     var index = e.currentTarget.dataset.index;
-    var scindex = e.currentTarget.dataset.scindex;
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
-    this.updateCount(shopCartItemDiscounts, scindex, index, 1);
+    this.updateCount(index, 1);
   },
 
 
   /**
    * 改变购物车数量接口
    */
-  updateCount: function (shopCartItemDiscounts, scindex, index, prodCount) {
+  updateCount: function (index, prodCount) {
     var ths = this;
+    var shopCart = this.data.shopCart;
     wx.showLoading({
       mask: true
     });
     var params = {
-      url: "/p/shopCart/changeItem",
+      url: "/api/mine/cart/",
       method: "POST",
       data: {
-        count: prodCount,
-        prodId: shopCartItemDiscounts[scindex].shopCartItems[index].prodId,
-        skuId: shopCartItemDiscounts[scindex].shopCartItems[index].skuId,
-        shopId: 1
+        count: shopCart[index].count + prodCount,
+        prodId: shopCart[index].commodity.id,
+        skuId: shopCart[index].specification ? shopCart[index].specification.id : undefined,
       },
       callBack: function (res) {
-        shopCartItemDiscounts[scindex].shopCartItems[index].prodCount += prodCount;
+        shopCart[index].count += prodCount;
         ths.setData({
-          shopCartItemDiscounts: shopCartItemDiscounts
+          shopCart: shopCart
         });
         ths.calTotalPrice();//计算总价
         wx.hideLoading();
@@ -257,18 +223,19 @@ Page({
   onDelBasket: function () {
     var ths = this;
 
-    var shopCartItemDiscounts = this.data.shopCartItemDiscounts;
-    var basketIds = [];
-    for (var i = 0; i < shopCartItemDiscounts.length; i++) {
-      var cItems = shopCartItemDiscounts[i].shopCartItems;
-      for (var j = 0; j < cItems.length; j++) {
-        if (cItems[j].checked) {
-          basketIds.push(cItems[j].basketId);
-        }
+    var shopCart = this.data.shopCart;
+    var deleteItems = [];
+    shopCart.forEach(item => {
+      if (item.checked) {
+        deleteItems.push({
+          prodId: item.commodity.id,
+          skuId: item.specification ? item.specification.id : null
+        });
       }
-    }
+    })
+    console.log(deleteItems)
 
-    if (basketIds.length == 0) {
+    if (deleteItems.length == 0) {
       wx.showToast({
         title: '请选择商品',
         icon: "none"
@@ -285,12 +252,16 @@ Page({
               mask: true
             });
             var params = {
-              url: "/p/shopCart/deleteItem",
+              url: "/api/mine/cart/",
               method: "DELETE",
-              data: basketIds,
+              data: {
+                items: deleteItems
+              },
               callBack: function (res) {
-                wx.hideLoading();
-                ths.onShow();
+                if (res.code == "ok") {
+                  wx.hideLoading();
+                  ths.onShow();
+                }
               }
             };
             http.request(params);

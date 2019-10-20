@@ -124,17 +124,17 @@ function updateUserInfo() {
 //获取购物车商品数量
 function getCartCount() {
   var params = {
-    url: "/p/shopCart/prodCount",
+    url: "/api/mine/cartCount/",
     method: "GET",
     data: {},
     callBack: function(res) {
-      if (res > 0) {
+      if (res.code == "ok" && res.data > 0) {
         wx.setTabBarBadge({
           index: 2,
-          text: res + "",
+          text: res.data + "",
         })
         var app = getApp();
-        app.globalData.totalCartCount = res;
+        app.globalData.totalCartCount = res.data;
       } else {
         wx.removeTabBarBadge({
           index: 2

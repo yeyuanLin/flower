@@ -92,7 +92,7 @@ Page({
 
   },
   getAllData() {
-    // http.getCartCount(); //重新计算购物车总数量
+    http.getCartCount();
     this.getIndexImgs();
     this.getNoticeList();
     this.getTag();

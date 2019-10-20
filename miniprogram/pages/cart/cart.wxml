@@ -7,7 +7,7 @@
           <view class='item'>
             <view class="btn">
               <label>
-                <checkbox bindtap='onSelectedItem' data-scindex="{{scIndex}}" data-index="{{index}}" value="{{item.id}}" checked="{{item.checked}}" color="#105c3e" />
+                <checkbox bindtap='onSelectedItem' data-index="{{index}}" value="{{item.id}}" checked="{{item.checked}}" color="#105c3e" />
               </label>
             </view>
             <view class='prodinfo'>
@@ -26,7 +26,7 @@
                   <view class="m-numSelector">
                     <view bindtap='onCountMinus' class="minus" data-scindex="{{scIndex}}" data-index="{{index}}"></view>
                     <input type='number' value='{{item.count}}' disabled></input>
-                    <view bindtap='onCountPlus' class="plus" data-scindex="{{scIndex}}" data-index="{{index}}"></view>
+                    <view bindtap='onCountPlus' class="plus" data-index="{{index}}"></view>
                   </view>
                 </view>
               </view>
@@ -78,7 +78,7 @@
   </view>
 
   <!-- 底部按钮 -->
-  <view class="cart-footer" wx:if="{{shopCartItemDiscounts.length>0}}">
+  <view class="cart-footer" wx:if="{{shopCart.length>0}}">
     <view class="btn all">
       <label bindtap='onSelAll'>
         <checkbox checked='{{allChecked}}' color='#f7d731;' />全选</label>
@@ -91,13 +91,13 @@
         <text>合计:</text>
         <view class='price'>
           <text class='symbol'>￥</text>
-          <text class='big-num'>{{wxs.parsePrice(finalMoney)[0]}}</text>
-          <text class='small-num'>.{{wxs.parsePrice(finalMoney)[1]}}</text>
+          <text class='big-num'>{{wxs.parsePrice(totalMoney)[0]}}</text>
+          <text class='small-num'>.{{wxs.parsePrice(totalMoney)[1]}}</text>
         </view>
       </view>
-      <view class="total-msg" wx:if="{{subtractMoney>0}}">
+      <!-- <view class="total-msg" wx:if="{{subtractMoney>0}}">
         总额:￥{{wxs.toPrice(totalMoney)}} 立减:￥{{wxs.toPrice(subtractMoney)}}
-      </view>
+      </view> -->
     </view>
     <view class="btn settle" bindtap='toFirmOrder'>
       <text>结算</text>
