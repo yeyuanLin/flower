@@ -18,7 +18,7 @@
         </view>
         <view class='user-info'>
           <text class='item'>{{userAddr.receiver}}</text>
-          <text class='item'>{{userAddr.mobile}}</text>
+          <text class='item'>{{userAddr.phone}}</text>
         </view>
         <view class='addr'>{{userAddr.province}}{{userAddr.city}}{{userAddr.area}}{{userAddr.addr}}</view>
         <view class='arrow'></view>
@@ -79,8 +79,8 @@
       <view class='msg-item'>
         <view class='item coupon' bindtap='showCouponPopup'>
           <text class='item-tit'>优惠券：</text>
-          <text class='item-txt' wx:if="{{!coupons.canUseCoupons}}">暂无可用</text>
-          <text class='coupon-btn'>{{coupons.totalLength? coupons.totalLength: 0}}张</text>
+          <text class='item-txt' wx:if="{{!coupons.available}}">暂无可用</text>
+          <text class='coupon-btn'>{{coupons.count}}张</text>
           <text class='arrow'></text>
         </view>
         <view class='item'>
@@ -160,10 +160,10 @@
       <view class="coupon-tab {{couponSts==2?'on':''}}" bindtap='changeCouponSts' data-sts='2'>不可用优惠券({{coupons.unCanUseCoupons.length}})</view>
     </view>
     <view class='popup-cnt'>
-      <block wx:for="{{coupons.canUseCoupons}}" wx:if="{{couponSts == 1}}" wx:key="couponId">
+      <block wx:for="{{coupons.available}}" wx:if="{{couponSts == 1}}" wx:key="couponId">
         <coupon item="{{item}}" order="{{true}}" bind:checkCoupon="checkCoupon" canUse="{{true}}"></coupon>
       </block>
-      <block wx:for="{{coupons.unCanUseCoupons}}" wx:if="{{couponSts == 2}}" wx:key="couponId">
+      <block wx:for="{{coupons.unavailable}}" wx:if="{{couponSts == 2}}" wx:key="couponId">
         <coupon item="{{item}}" order="{{true}}" canUse="{{false}}"></coupon>
       </block>
       <view class="botm-empty"></view>

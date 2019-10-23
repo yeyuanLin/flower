@@ -8,15 +8,14 @@ Page({
   data: {
     popupShow: false,
     couponSts: 1,
-    couponList: [],
     // 订单入口 0购物车 1立即购买
     orderEntry: "0",
     userAddr: null,
     orderItems: [],
-    coupon: {
-      totalLength: 0,
-      canUseCoupons: [],
-      noCanUseCoupons: []
+    coupons: {
+      count: 0,
+      available: [],
+      unavailable: []
     },
     prodTotal: 0,
     total: 0,
@@ -24,7 +23,8 @@ Page({
     freight: 0,
     discountedPrice: 0,
     remark: "",
-    couponIds: []
+    couponId: null,
+    orderUuid: null,
   },
 
   /**
@@ -40,7 +40,7 @@ Page({
   loadOrderData: function () {
     var addrId = 0;
     if (this.data.userAddr != null) {
-      addrId = this.data.userAddr.addrId;
+      addrId = this.data.userAddr.id;
     }
     wx.showLoading({
       mask: true
@@ -52,46 +52,33 @@ Page({
         addrId: addrId,
         orderItem: this.data.orderEntry === "1" ? JSON.parse(wx.getStorageSync("orderItem")) : undefined,
         basketIds: this.data.orderEntry === "0" ? JSON.parse(wx.getStorageSync("basketIds")) : undefined,
-        couponIds: this.data.couponIds,
+        couponId: this.data.couponId,
       },
       callBack: res => {
         if (res.code == "ok") {
           wx.hideLoading();
           const orderItems = res.data.prodItems;
 
-        // if (res.shopCartOrders[0].coupons) {
-        //   let canUseCoupons = []
-        //   let unCanUseCoupons = []
-        //   res.shopCartOrders[0].coupons.forEach(coupon => {
-        //     if (coupon.canUse) {
-        //       canUseCoupons.push(coupon)
-        //     } else {
-        //       unCanUseCoupons.push(coupon)
-        //     }
-        //   })
-        //   this.setData({
-        //     coupons: {
-        //       totalLength: res.shopCartOrders[0].coupons.length,
-        //       canUseCoupons: canUseCoupons,
-        //       unCanUseCoupons: unCanUseCoupons
-        //     }
-        //   })
-        // }
-
-        this.setData({
-          orderItems: orderItems,
-          total: res.data.total,
-          prodTotal: res.data.prod_total,
-          count: res.data.count,
-          userAddr: res.data.addr,
-          freight: res.data.freight,
-          discountedPrice: res.data.discounted_price,
-        });
+          this.setData({
+            orderItems: orderItems,
+            total: res.data.total,
+            prodTotal: res.data.prod_total,
+            count: res.data.count,
+            freight: res.data.freight,
+            discountedPrice: res.data.discounted_price,
+            orderUuid: res.data.order_uuid,
+            coupons: res.data.coupon,
+          });
+          // addr没有值，代表更改了addr或者是用户没设置地址
+          if (res.data.addr) {
+            this.setData({
+              userAddr: res.data.addr,
+            })
+          }
+        } else {
+          wx.hideLoading();
+          this.errorHandle(res)
         }
-      },
-      errCallBack: res => {
-        wx.hideLoading();
-        this.chooseCouponErrHandle(res)
       }
     };
     http.request(params);
@@ -99,25 +86,18 @@ Page({
   },
 
   /**
-   * 优惠券选择出错处理方法
+   * 出错处理方法
    */
-  chooseCouponErrHandle(res) {
+  errorHandle(res) {
     // 优惠券不能共用处理方法
-    if (res.statusCode == 601) {
-      wx.showToast({
-        title: res.data,
-        icon: "none",
-        duration: 3000,
-        success: res => {
-          this.setData({
-            couponIds: []
-          })
-        }
-      })
-      setTimeout(() => {
-        this.loadOrderData();
-      }, 2500)
-    }
+    wx.showToast({
+      title: res.data,
+      icon: "none",
+      duration: 3000,
+    })
+    setTimeout(() => {
+      wx.navigateBack();
+    }, 2000)
   },
 
   /**
