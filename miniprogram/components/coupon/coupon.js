@@ -43,7 +43,6 @@ Component({
       })
     },
     checkCoupon(e) {
-      // this.triggerEvent('checkCoupon', this.data.index);
       this.triggerEvent('checkCoupon', {
         couponId: e.currentTarget.dataset.couponid
       });

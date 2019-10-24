@@ -274,12 +274,26 @@ Page({
    * 优惠券子组件发过来
    */
   checkCoupon: function (e) {
-    var ths = this;
-    let index = ths.data.couponIds.indexOf(e.detail.couponId);
-    if (index === -1) {
-      ths.data.couponIds.push(e.detail.couponId)
+    const couponId = e.detail.couponId;
+    const coupons = this.data.coupons;
+    coupons.available.forEach((item, index) => {
+      coupons.available[index].choose = false;
+    })
+    if (couponId != this.data.couponId) {
+      coupons.available.forEach((item, index) => {
+        if (couponId == item.id) {
+          coupons.available[index].choose = true;
+        }
+      })
+      this.setData({
+        coupons: coupons,
+        couponId: couponId
+      });
     } else {
-      ths.data.couponIds.splice(index, 1)
+      this.setData({
+        coupons: coupons,
+        couponId: null
+      });
     }
   }
 })

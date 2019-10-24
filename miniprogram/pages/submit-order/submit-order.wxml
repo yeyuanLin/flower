@@ -20,7 +20,7 @@
           <text class='item'>{{userAddr.receiver}}</text>
           <text class='item'>{{userAddr.phone}}</text>
         </view>
-        <view class='addr'>{{userAddr.province}}{{userAddr.city}}{{userAddr.area}}{{userAddr.addr}}</view>
+        <view class='addr'>{{userAddr.province.name}}{{userAddr.city.name}}{{userAddr.area.name}}{{userAddr.addr}}</view>
         <view class='arrow'></view>
       </view>
     </view>
@@ -156,8 +156,8 @@
       <text class="close" bindtap='closePopup'></text>
     </view>
     <view class="coupon-tabs">
-      <view class="coupon-tab {{couponSts==1?'on':''}}" bindtap='changeCouponSts' data-sts='1'>可用优惠券({{coupons.canUseCoupons.length}})</view>
-      <view class="coupon-tab {{couponSts==2?'on':''}}" bindtap='changeCouponSts' data-sts='2'>不可用优惠券({{coupons.unCanUseCoupons.length}})</view>
+      <view class="coupon-tab {{couponSts==1?'on':''}}" bindtap='changeCouponSts' data-sts='1'>可用优惠券({{coupons.available.length}})</view>
+      <view class="coupon-tab {{couponSts==2?'on':''}}" bindtap='changeCouponSts' data-sts='2'>不可用优惠券({{coupons.unavailable.length}})</view>
     </view>
     <view class='popup-cnt'>
       <block wx:for="{{coupons.available}}" wx:if="{{couponSts == 1}}" wx:key="couponId">

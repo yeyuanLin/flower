@@ -22,19 +22,19 @@
             <!--省-->
             <picker-view-column>
               <view wx:for="{{provArray}}" wx:key="">
-                {{item.areaName}}
+                {{item.name}}
               </view>
             </picker-view-column>
             <!--地级市-->
             <picker-view-column>
               <view wx:for="{{cityArray}}" wx:key="">
-                {{item.areaName}}
+                {{item.name}}
               </view>
             </picker-view-column>
             <!--区县-->
             <picker-view-column>
               <view wx:for="{{areaArray}}" wx:key="">
-                {{item.areaName}}
+                {{item.name}}
               </view>
             </picker-view-column>
           </picker-view>
@@ -61,7 +61,7 @@
 
     <!-- <view class='clear btn' bindtap="onDeleteAddr"  wx:if="{{addrId!=0}}"> -->
       <!-- <text>删除收货地址</text> -->
-      <van-button plain round size="large" type="danger" bindtap="onDeleteAddr" wx:if="{{addrId!=0}}">删除收货地址</van-button>
+      <van-button plain round size="large" type="danger" bindtap="onDeleteAddr" wx:if="{{addrId}}">删除收货地址</van-button>
     <!-- </view>  -->
     
   </view>
