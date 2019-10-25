@@ -20,7 +20,7 @@ Page({
     popupShow: false,
     selectedSkuId: null,
     selectedProp: [],
-
+    loadCouponIds: [],
   },
   /**
    * 添加或者取消收藏商品 
@@ -73,6 +73,7 @@ Page({
       }
     }
     http.request(params);
+    this.getCouponList();
   },
 
   /**
@@ -263,5 +264,63 @@ Page({
       };
       http.request(params);
     }
+  },
+  // 获取优惠券
+  getCouponList() {
+    http.request({
+      url: "/api/commodity/coupon/",
+      method: "GET",
+      data: {
+        prodId: this.data.prodId,
+      },
+      callBack: (res) => {
+        this.setData({
+          couponList: res.data
+        })
+      }
+    })
+  },
+  // 领券
+  showPopup: function() {
+    if (this.data.loadCouponIds) {
+      this.setData({
+        popupShow: true
+      });
+      return;
+    }
+    http.request({
+      url: "/api/myCoupon/listCouponIds",
+      method: "GET",
+      data: {},
+      callBack: (couponIds) => {
+        var couponList = this.data.couponList;
+        console.log(couponList)
+
+        couponList.forEach(coupon => {
+          if (couponIds && couponIds.length) {
+            // 领取该优惠券数量
+            var couponLimit = 0;
+            couponIds.forEach(couponId => {
+              if (couponId == coupon.couponId) {
+                couponLimit++;
+              }
+            });
+            // 小于用户领取优惠券上限，可以领取优惠券
+            if (couponLimit < coupon.limitNum) {
+              coupon.canReceive = true;
+            } else {
+              coupon.canReceive = false;
+            }
+          } else {
+            coupon.canReceive = true;
+          }
+        });
+        this.setData({
+          couponList: couponList,
+          popupShow: true,
+          loadCouponIds: true
+        })
+      }
+    })
   },
 })

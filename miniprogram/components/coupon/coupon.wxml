@@ -16,10 +16,11 @@
             <text class="c-type">{{item.type==1?'通用':'商品'}}</text> {{item.type==1?'全场通用':'指定商品可用'}}
         </view>
         <view class="c-date">
-            <text wx:if="{{showTimeType==1 && item.couponType==2}}" class="c-data-info">领券{{item.validDays}}天后失效</text>
+            <text wx:if="{{showTimeType==1 && item.status=='已领取'}}" class="c-data-info">领券{{item.valid_days}}天后失效</text>
             <text wx:else class="c-data-info">{{item.min_data}}~{{item.max_data}}</text>
-            <text class="c-btn" wx:if="{{item.canReceive && !order}}" bindtap='receiveCoupon'>立即领取</text>
-            <text class="c-btn get-btn" wx:if="{{!item.canReceive && !order}}" bindtap='useCoupon'>立即使用</text>
+            <text class="c-btn" wx:if="{{item.status=='未领取' && !order}}" bindtap='receiveCoupon'>立即领取</text>
+            <text class="c-btn" wx:if="{{item.status=='已领取' && !order}}" bindtap='useCoupon'>立即使用</text>
+            <text class="c-btn get-btn" wx:if="{{item.status=='已使用' && !order}}">已使用</text>
         </view>
         <view wx:if="{{order && canUse}}" class="sel-btn">
             <checkbox color="#eb2444" data-couponid="{{item.id}}" checked="{{item.choose}}" bindtap="checkCoupon"></checkbox>

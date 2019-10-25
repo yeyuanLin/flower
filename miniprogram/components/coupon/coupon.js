@@ -16,8 +16,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    stsType: 4
-
+    stsType: 4,
   },
   // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
   attached: function() {
@@ -28,16 +27,16 @@ Component({
    */
   methods: {
     receiveCoupon() {
-      var couponId = this.data.item.couponId;
+      var couponId = this.data.item.id;
       http.request({
-        url: "/p/myCoupon/receive",
+        url: "/api/mine/receive/",
         method: "POST",
-        data: couponId,
-        callBack: () => {
-          var coupon = this.data.item;
-          coupon.canReceive = false;
+        data: {
+          id: couponId
+        },
+        callBack: (res) => {
           this.setData({
-            item: coupon
+            item: res.data
           })
         }
       })

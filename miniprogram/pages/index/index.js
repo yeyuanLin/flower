@@ -35,7 +35,9 @@ Page({
       scrollTop: e.scrollTop
     })
   },
-
+  /**
+   * 跳转至商品详情
+   */
   toProdPage: function (e) {
     var prodid = e.currentTarget.dataset.prodid;
     wx.navigateTo({
@@ -59,13 +61,13 @@ Page({
 
   //跳转商品活动页面
   toClassifyPage: function (e) {
-    // var url = '/pages/prod-classify/prod-classify?sts=' + e.currentTarget.dataset.sts;
-    var url = '/pages/classify/classify';
+    var url = '/pages/classify/classify?sts=0';
     var id = e.currentTarget.dataset.id;
     var title = e.currentTarget.dataset.title;
     if (id) {
       url += "&tagid=" + id + "&title=" + title;
     }
+    console.log(url)
     wx.navigateTo({
       url: url
     })
@@ -140,10 +142,9 @@ Page({
         this.setData({
           taglist: res.data,
         });
-        // console.log(res);
-        for (var i = 0; i < res.length; i++) {
-          this.getTagProd(res[i].id, i);
-        }
+        // for (var i = 0; i < res.length; i++) {
+        //   this.getTagProd(res[i].id, i);
+        // }
       }
     };
     http.request(params);
@@ -203,15 +204,4 @@ Page({
 
   },
 
-  /**
-   * 跳转至商品详情
-   */
-  showProdInfo: function (e) {
-    let relation = e.currentTarget.dataset.relation;
-    if (relation) {
-      wx.navigateTo({
-        url: 'pages/prod/prod',
-      })
-    }
-  }
 })

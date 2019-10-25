@@ -3,7 +3,7 @@
   <view class='tit-background'></view>
   <view>
     <block wx:for="{{prodList}}" wx:key ="key">
-      <prod item="{{item}}" >这是商品列表页</prod>
+      <prod item="{{item}}"></prod>
     </block>
   </view>
 </view>
